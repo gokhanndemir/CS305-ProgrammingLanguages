@@ -1,0 +1,69 @@
+  int counterofline=1,i;
+  float f;
+%{
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+/*double number1(double num)
+{
+
+}
+void number2(int num) // bastaki sifirlar gidecek
+{
+}
+void invalidString(char* yytext)
+{
+
+}*/
+void print(char arr[])
+{
+    for(int i=1;i<strlen(arr)-1;++i)
+    {
+        char a=arr[i];
+        printf("%c",a);
+    }
+    printf(")\n");
+}
+//-?[0-9]+ number1(yytext);
+//-?\d+(\.\d+)? number2(yytext);
+//. invalidString(yytext);
+//. printf("%d tNUM (%s) (%s)",counterofline,yytext);
+//-?\d+(\.\d+){1} printf("%d tNUM (%f) (%f)\n",counterofline,(float)atof(yytext),(float)atof(yytext));
+//-?\d+(\.\d+)* printf("%d tNUM (%d) (%d)\n",counterofline,sscanf(yytext, "%d", &i),sscanf(yytext, "%d", &i));
+%}
+%%
+-?\d+(\.\d+){1} printf("%d tNUM (%s) (%s)\n",counterofline,(float)atof(yytext),(float)atof(yytext));
+-?\d+(\.\d+)* printf("%d tNUM (%s) (%s)\n",counterofline,sscanf(yytext, "%d", &i),sscanf(yytext, "%d", &i));
+"\n" counterofline++;
+","  printf("%d tCOMMA\n",counterofline);
+"+"  printf("%d tPLUS\n",counterofline);
+"*"  printf("%d tMUL\n",counterofline);
+"<"  printf("%d tLT\n",counterofline);
+">"  printf("%d tGT\n",counterofline);
+"["  printf("%d tLBRAC\n",counterofline);
+"--"  printf("%d tDEC\n",counterofline);
+"++"  printf("%d tINC\n",counterofline);
+"-"   printf("%d tMINUS\n",counterofline);
+"/"   printf("%d tDIV\n",counterofline);
+"=="  printf("%d tEQUALITY\n",counterofline);
+"<="  printf("%d tLEQ\n",counterofline);
+">="  printf("%d tGEQ\n",counterofline);
+"]"   printf("%d tRBRAC\n",counterofline);
+\"Get\" printf("%d tGET\n",counterofline);
+\"Set\" printf("%d tSET\n",counterofline);
+\"If\"  printf("%d tIF\n",counterofline);
+\"Return\"  printf("%d tRETURN\n",counterofline);
+\"Function\"     printf("%d tFUNCTION\n",counterofline);
+\"Print\"        printf("%d tPRINT\n",counterofline);
+\"For\"          printf("%d tFOR\n",counterofline);
+["][a-zA-Z_]([a-zA-Z0-9_])*["] {printf("%d tIDENT (",counterofline);print(yytext);}
+[']([^'])*[']  {printf("%d tSTRING (",counterofline);print(yytext);}
+" "  printf("");
+"\t"  printf("");
+.   
+%%
+int main()
+{
+   yylex();
+   return 0;
+}
