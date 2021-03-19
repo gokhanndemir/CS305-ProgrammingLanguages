@@ -1,0 +1,4 @@
+000.0001000
+-000.00
+'Hello World!'
+-005.000 "6thisIsNotAvalidVariableName"
