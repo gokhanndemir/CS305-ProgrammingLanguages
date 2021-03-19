@@ -1,20 +1,10 @@
   int counterofline=1,i;
-  float f;
+  double d;
 %{
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-/*double number1(double num)
-{
 
-}
-void number2(int num) // bastaki sifirlar gidecek
-{
-}
-void invalidString(char* yytext)
-{
-
-}*/
 void print(char arr[])
 {
     for(int i=1;i<strlen(arr)-1;++i)
@@ -24,16 +14,10 @@ void print(char arr[])
     }
     printf(")\n");
 }
-//-?[0-9]+ number1(yytext);
-//-?\d+(\.\d+)? number2(yytext);
-//. invalidString(yytext);
-//. printf("%d tNUM (%s) (%s)",counterofline,yytext);
-//-?\d+(\.\d+){1} printf("%d tNUM (%f) (%f)\n",counterofline,(float)atof(yytext),(float)atof(yytext));
-//-?\d+(\.\d+)* printf("%d tNUM (%d) (%d)\n",counterofline,sscanf(yytext, "%d", &i),sscanf(yytext, "%d", &i));
 %}
 %%
--?\d+(\.\d+){1} printf("%d tNUM (%s) (%s)\n",counterofline,(float)atof(yytext),(float)atof(yytext));
--?\d+(\.\d+)* printf("%d tNUM (%s) (%s)\n",counterofline,sscanf(yytext, "%d", &i),sscanf(yytext, "%d", &i));
+-?[0-9]+"."([0-9])+ {sscanf(yytext, "%lf", &d); printf("%d tNUM (%s) (%lf)\n",counterofline,yytext,d);}
+-?[0-9]+ printf("%d tNUM (%s) (%d)\n", counterofline, yytext,atoi(yytext));
 "\n" counterofline++;
 ","  printf("%d tCOMMA\n",counterofline);
 "+"  printf("%d tPLUS\n",counterofline);
