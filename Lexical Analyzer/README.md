@@ -1,6 +1,6 @@
 lex.yy.c is obtained by flex demirgokhan-hw1.flx
 
-g is obtained by gcc -std=c99 -o g lex.yy.c -lfl or gcc -gnu=c99 -o g lex.yy.c -lfl
+g is obtained by gcc -std=c99 -o g lex.yy.c -lfl or gcc -std=gnu99 -o g lex.yy.c -lfl
 
 -lfl means link flex library
 
