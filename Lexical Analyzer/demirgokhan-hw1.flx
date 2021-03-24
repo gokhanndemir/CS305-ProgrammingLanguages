@@ -14,25 +14,26 @@ void print(char arr[])
     }
     printf(")\n");
 }
+//\"-\"
 %}
 %%
 -?[0-9]+"."([0-9])+ {sscanf(yytext, "%lf", &d); printf("%d tNUM (%s) (%lf)\n",counterofline,yytext,d);}
 -?[0-9]+ printf("%d tNUM (%s) (%d)\n", counterofline, yytext,atoi(yytext));
-"\n" counterofline++;
-","  printf("%d tCOMMA\n",counterofline);
-"+"  printf("%d tPLUS\n",counterofline);
-"*"  printf("%d tMUL\n",counterofline);
-"<"  printf("%d tLT\n",counterofline);
-">"  printf("%d tGT\n",counterofline);
-"["  printf("%d tLBRAC\n",counterofline);
-"--"  printf("%d tDEC\n",counterofline);
-"++"  printf("%d tINC\n",counterofline);
-"-"   printf("%d tMINUS\n",counterofline);
-"/"   printf("%d tDIV\n",counterofline);
-"=="  printf("%d tEQUALITY\n",counterofline);
-"<="  printf("%d tLEQ\n",counterofline);
-">="  printf("%d tGEQ\n",counterofline);
-"]"   printf("%d tRBRAC\n",counterofline);
+\n counterofline++;
+,  printf("%d tCOMMA\n",counterofline);
+\"+\"  printf("%d tPLUS\n",counterofline);
+["][*]["]  printf("%d tMUL\n",counterofline);
+\"<\"  printf("%d tLT\n",counterofline);
+\">\"  printf("%d tGT\n",counterofline);
+"["    printf("%d tLBRAC\n",counterofline);
+\"--\"  printf("%d tDEC\n",counterofline);
+["][+][+]["]  printf("%d tINC\n",counterofline);
+["][-]["]   printf("%d tMINUS\n",counterofline);
+["][/]["]   printf("%d tDIV\n",counterofline);
+\"==\"  printf("%d tEQUALITY\n",counterofline);
+\"<=\"  printf("%d tLEQ\n",counterofline);
+\">=\"  printf("%d tGEQ\n",counterofline);
+"]"     printf("%d tRBRAC\n",counterofline);
 \"Get\" printf("%d tGET\n",counterofline);
 \"Set\" printf("%d tSET\n",counterofline);
 \"If\"  printf("%d tIF\n",counterofline);
@@ -42,9 +43,8 @@ void print(char arr[])
 \"For\"          printf("%d tFOR\n",counterofline);
 ["][a-zA-Z_]([a-zA-Z0-9_])*["] {printf("%d tIDENT (",counterofline);print(yytext);}
 [']([^'])*[']  {printf("%d tSTRING (",counterofline);print(yytext);}
-" "  printf("");
-"\t"  printf("");
-.   
+[ \t]                                                          
+.     
 %%
 int main()
 {
