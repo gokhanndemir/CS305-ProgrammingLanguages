@@ -1,4 +1,4 @@
-  int counterofline=1,i;
+  int counterofline=1;
   double d;
 %{
 #include<stdio.h>
@@ -14,25 +14,24 @@ void print(char arr[])
     }
     printf(")\n");
 }
-//\"-\"
 %}
 %%
 -?[0-9]+"."([0-9])+ {sscanf(yytext, "%lf", &d); printf("%d tNUM (%s) (%lf)\n",counterofline,yytext,d);}
 -?[0-9]+ printf("%d tNUM (%s) (%d)\n", counterofline, yytext,atoi(yytext));
 \n counterofline++;
 ,  printf("%d tCOMMA\n",counterofline);
-\"+\"  printf("%d tPLUS\n",counterofline);
+["][+]["]  printf("%d tPLUS\n",counterofline);
 ["][*]["]  printf("%d tMUL\n",counterofline);
-\"<\"  printf("%d tLT\n",counterofline);
-\">\"  printf("%d tGT\n",counterofline);
+["][<]["]  printf("%d tLT\n",counterofline);
+["][>]["]  printf("%d tGT\n",counterofline);
 "["    printf("%d tLBRAC\n",counterofline);
-\"--\"  printf("%d tDEC\n",counterofline);
+["][-][-]["]  printf("%d tDEC\n",counterofline);
 ["][+][+]["]  printf("%d tINC\n",counterofline);
 ["][-]["]   printf("%d tMINUS\n",counterofline);
 ["][/]["]   printf("%d tDIV\n",counterofline);
-\"==\"  printf("%d tEQUALITY\n",counterofline);
-\"<=\"  printf("%d tLEQ\n",counterofline);
-\">=\"  printf("%d tGEQ\n",counterofline);
+["][=][=]["]  printf("%d tEQUALITY\n",counterofline);
+["][<][=]["]  printf("%d tLEQ\n",counterofline);
+["][>][=]["]  printf("%d tGEQ\n",counterofline);
 "]"     printf("%d tRBRAC\n",counterofline);
 \"Get\" printf("%d tGET\n",counterofline);
 \"Set\" printf("%d tSET\n",counterofline);
